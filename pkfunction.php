@@ -8,7 +8,7 @@ $specialQuery = $con->query("SELECT * from `tableName`") or die ($con->error);
 $data = $specialQuery->fetch_assoc();
 $numData = $specialQuery->num_rows;
 
-if($numData > 0){ // if database has one or more data...
+if($numData > 0){ // if database has one or more data row...
   do{
       $allNumData = $data['primaryKey']; // get all unique data
   } while($data = $specialQuery->fetch_assoc());
