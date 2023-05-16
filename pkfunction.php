@@ -6,7 +6,7 @@ $con = config();
 
 $specialQuery = $con->query("SELECT * from `tableName`") or die ($con->error);
 $data = $specialQuery->fetch_assoc();
-$numData = $specialQuery->num_rows;
+$num_data = $specialQuery->num_rows;
 
 if($num_data > 0){ // if database has one or more row/s...
   // generate num
