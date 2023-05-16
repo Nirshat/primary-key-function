@@ -9,17 +9,17 @@ $data = $specialQuery->fetch_assoc();
 $numData = $specialQuery->num_rows;
 
 if($num_data > 0){ // if database has one or more row/s...
-
   // generate num
-  $num_data += 1; // count num of rows and add 1
-  // check if the generated num has duplicate
-  $checknum_data = $con->query("SELECT `columnName` FROM `tableName` WHERE `columnName`='$num_data'");
-  // count the duplicates
-  $count_numdata = $checknum_data->num_rows;
-
+  $checknum_data = $con->query("SELECT `uniqueID` FROM `tableName` WHERE `uniqueID`='$num_data'");
+  $count_numdata = $checknum_data->num_rows; // count duplicates
   do{
       // continously generate a number while it has duplicate
-      $num_data += 1;
+      $num_data += 1; // this will be the unique key
+      $checknum_data = $con->query("SELECT `uniqueID` FROM `tableName` WHERE `uniqueID`='$num_data'");
+      $count_numdata = $checknum_data->num_rows; // count duplicates
+      if($count_numdata == 0){
+          break;
+        }
   } while($count_numdata >= 1); // 1 or more duplicate/s
 }
 
