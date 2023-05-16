@@ -8,17 +8,22 @@ $specialQuery = $con->query("SELECT * from `tableName`") or die ($con->error);
 $data = $specialQuery->fetch_assoc();
 $numData = $specialQuery->num_rows;
 
-if($numData > 0){ // if database has one or more data row...
-  do{
-      $allNumData = $data['primaryKey']; // get all unique data
-  } while($data = $specialQuery->fetch_assoc());
+if($num_data > 0){ // if database has one or more row/s...
+
+  // generate num
+  $num_data += 1; // count num of rows and add 1
+  // check if the generated num has duplicate
+  $checknum_data = $con->query("SELECT `columnName` FROM `tableName` WHERE `columnName`='$num_data'");
+  // count the duplicates
+  $count_numdata = $checknum_data->num_rows;
 
   do{
-      $numData += 1;
-  } while($numData == $allNumData);
+      // continously generate a number while it has duplicate
+      $num_data += 1;
+  } while($count_numdata >= 1); // 1 or more duplicate/s
 }
 
 else{
-    $numData += 1;
+    $num_data += 1;
 }
 ?>
